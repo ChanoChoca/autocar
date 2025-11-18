@@ -107,7 +107,7 @@ Escribí las siguientes 3 queries sobre la base creada:
 
 ## Guía de ejecutar la web app
 
-Crear archivo .env con variable DATABASE_URL a la base de datos MySQL que tengas.
+Crear archivo `.env` con variable `DATABASE_URL` a la base de datos MySQL que tengas.
 
 Instalar dependencias
 
@@ -115,7 +115,7 @@ Instalar dependencias
 npm i
 ```
 
-Crear schema y tablas y poblar base de datos:
+Crear schema y tablas y poblar base de datos
 
 ```bash
 npx prisma migrate dev --name init
@@ -141,7 +141,7 @@ npm run dev
 
 ### Archivo SQL solicitado: [entrega.sql](sql/entrega.sql)
 
-### Interfaz gráfica de la base de datos.
+### Interfaz gráfica de la base de datos
 
 ```bash
 npx prisma studio
