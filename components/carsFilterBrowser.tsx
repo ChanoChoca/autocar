@@ -53,10 +53,10 @@ export default async function CarsFilterBrowser({
   const totalPages = Math.ceil(total / 10);
 
   return (
-    <SearchProvider>
-      <div className="w-full flex flex-col lg:flex-row gap-5 px-5">
-        <div className="bg-white p-5 rounded-xl h-fit lg:min-w-[454px]">
-          <p className="font-semibold">Filtros</p>
+    <div className="w-full flex flex-col lg:flex-row gap-5 px-5">
+      <div className="bg-white p-5 rounded-xl h-fit lg:min-w-[454px]">
+        <p className="font-semibold">Filtros</p>
+        <SearchProvider>
           <div className="flex flex-col items-start justify-between gap-5 mt-5">
             <div className="space-y-2.5 w-full">
               <details className="group">
@@ -242,33 +242,33 @@ export default async function CarsFilterBrowser({
               </details>
             </div>
           </div>
-        </div>
-        {totalPages === 0 ? (
-          <div className="w-full">
-            <h2 className="font-bold text-5xl text-center mt-10">
-              No se encontraron resultados
-            </h2>
-          </div>
-        ) : (
-          <div>
-            <Suspense key={currentPage} fallback={<Loading />}>
-              <CarsList
-                currentPage={currentPage}
-                min={min}
-                max={max}
-                type={type}
-                brands={brands}
-                models={models}
-                year={year}
-                transmission={transmission}
-              />
-            </Suspense>
-            <div className="mt-5 flex w-full justify-center">
-              <Pagination totalPages={totalPages} />
-            </div>
-          </div>
-        )}
+        </SearchProvider>
       </div>
-    </SearchProvider>
+      {totalPages === 0 ? (
+        <div className="w-full">
+          <h2 className="font-bold text-5xl text-center mt-10">
+            No se encontraron resultados
+          </h2>
+        </div>
+      ) : (
+        <div>
+          <Suspense key={currentPage} fallback={<Loading />}>
+            <CarsList
+              currentPage={currentPage}
+              min={min}
+              max={max}
+              type={type}
+              brands={brands}
+              models={models}
+              year={year}
+              transmission={transmission}
+            />
+          </Suspense>
+          <div className="mt-5 flex w-full justify-center">
+            <Pagination totalPages={totalPages} />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
