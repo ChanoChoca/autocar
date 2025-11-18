@@ -107,18 +107,12 @@ Escribí las siguientes 3 queries sobre la base creada:
 
 ## Guía de ejecutar la web app
 
-Modificar del archivo [.env](.env) la variable DATABASE_URL a la base de datos MySQL que tengas.
+Crear archivo .env con variable DATABASE_URL a la base de datos MySQL que tengas.
 
 Instalar dependencias
 
 ```bash
 npm i
-```
-
-Inicializar prisma en el proyecto:
-
-```bash
-npx prisma init --datasource-provider mysql --output ../app/generated/prisma
 ```
 
 Crear schema y tablas y poblar base de datos:
