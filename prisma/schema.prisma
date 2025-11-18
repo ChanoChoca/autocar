@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum CarType {
+  VAN
+  SUV
+  Sedán
+  Hatchback
+  Cupé
+  Convertible
+  Camioneta
+  Rural
+}
+
+model Car {
+  id                     Int        @id @default(autoincrement())
+  brand                  String
+  model                  String
+  year                   Int
+  fuel                   String
+  transmission           String
+  price                  Float
+  version                String
+  images                 CarImage[]
+  type                   CarType
+  sales                  Sale[]
+  acceleration           Float
+  horsepower             Int
+  cylinders              Int
+  gears                  Int
+  liters                 Float
+  grossWeight            Int
+  fuelType               String
+  engineType             String
+  rimDiameter            Int
+  doors                  Int
+  rimType                String
+  lowBeamBulb            String
+  airConditioning        Boolean
+  cruiseControl          Boolean
+  brakeDiscs             Int
+  brakeAssist            Boolean
+  frontAirbags           Boolean
+  absBrakes              Boolean
+  totalAirbags           Int
+  kneeAirbag             Boolean
+  passengers             Int
+  seatMaterial           String
+  bluetooth              Boolean
+  radio                  String
+}
+
+model CarImage {
+  id        Int     @id @default(autoincrement())
+  url       String
+  carId Int
+  car   Car @relation(fields: [carId], references: [id], onDelete: Cascade)
+}
+
+model Client {
+  id        Int    @id @default(autoincrement())
+  firstName String
+  lastName  String
+  email     String @unique
+  phone     String?
+  image     String
+  sales     Sale[]
+}
+
+model PaymentMethod {
+  id    Int    @id @default(autoincrement())
+  name  String
+  sales Sale[]
+}
+
+model Sale {
+  id              Int           @id @default(autoincrement())
+  carId       Int
+  clientId        Int
+  paymentMethodId Int
+  saleDate        DateTime      @default(now())
+
+  car           Car           @relation(fields: [carId], references: [id])
+  client        Client        @relation(fields: [clientId], references: [id])
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+}

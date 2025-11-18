@@ -1,0 +1,7 @@
+[
+  { "carId": 1, "clientId": 1, "paymentMethodId": 1 },
+  { "carId": 2, "clientId": 2, "paymentMethodId": 2 },
+  { "carId": 3, "clientId": 3, "paymentMethodId": 1 },
+  { "carId": 4, "clientId": 4, "paymentMethodId": 2 },
+  { "carId": 5, "clientId": 5, "paymentMethodId": 1 }
+]
