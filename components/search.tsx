@@ -1,7 +1,6 @@
 "use client";
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useSearchContext } from "./searchProvicer";
 
 export default function Search({
   param,
@@ -14,29 +13,15 @@ export default function Search({
   type?: string;
   options?: string[];
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
-
-  const [value, setValue] = useState(searchParams.get(param) || "");
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const params = new URLSearchParams(searchParams);
-      params.set("page", "1");
-      value ? params.set(param, value) : params.delete(param);
-      replace(`${pathname}?${params.toString()}`);
-    }, 300);
-
-    return () => clearTimeout(timeout);
-  }, [value]);
+  const { values, setValue } = useSearchContext();
+  const value = values[param] || "";
 
   const commonProps = {
     className:
       "block w-full rounded-md border border-gray-200 py-[9px] px-3 text-sm outline-2 placeholder:text-gray-500",
     value,
     onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) =>
-      setValue(e.target.value),
+      setValue(param, e.target.value),
   };
 
   return options?.length ? (

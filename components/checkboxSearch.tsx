@@ -1,6 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+
+import { useSearchContext } from "./searchProvicer";
 
 type OptionShape = { value: string; brand?: string };
 
@@ -11,46 +11,23 @@ export default function CheckboxGroup({
   param: string;
   options: (string | OptionShape)[];
 }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const { replace } = useRouter();
-
-  const initialValues = searchParams.get(param)?.split(",") || [];
-  const [selected, setSelected] = useState<string[]>(initialValues);
-
+  const { values, setValue } = useSearchContext();
+  const selected: string[] = (values[param] as string[]) || [];
   const normalizedOptions: OptionShape[] = options.map((o) =>
     typeof o === "string" ? { value: o } : o
   );
 
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("page", "1");
-    if (selected.length) {
-      params.set(param, selected.join(","));
-    } else {
-      params.delete(param);
-    }
-    replace(`${pathname}?${params.toString()}`);
-  }, [selected, pathname]);
-
   const toggle = (value: string, opt?: OptionShape) => {
     const isSelected = selected.includes(value);
-    const adding = !isSelected;
+    const newSelected = isSelected
+      ? selected.filter((v) => v !== value)
+      : [...selected, value];
+    setValue(param, newSelected);
 
-    setSelected((prev) =>
-      isSelected ? prev.filter((v) => v !== value) : [...prev, value]
-    );
-
-    if (param === "models" && adding && opt?.brand) {
-      const params = new URLSearchParams(searchParams.toString());
-      const brandsParam =
-        params.get("brands")?.split(",").filter(Boolean) || [];
-      if (!brandsParam.includes(opt.brand)) {
-        brandsParam.push(opt.brand);
-        params.set("brands", brandsParam.join(","));
-      }
-      params.set("page", "1");
-      replace(`${pathname}?${params.toString()}`);
+    if (param === "models" && !isSelected && opt?.brand) {
+      const currentBrands: string[] = (values["brands"] as string[]) || [];
+      if (!currentBrands.includes(opt.brand))
+        setValue("brands", [...currentBrands, opt.brand]);
     }
   };
 

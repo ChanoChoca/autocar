@@ -76,56 +76,56 @@ export default function Home() {
         <div className="container px-5 mx-auto">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 font-bold text-xl sm:text-2xl md:text-3xl">
             <Link
-              href="/autos?type=Sedán"
+              href="/autos?type=Sedán&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Sedán
               <img src="/images/types/sedan.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=Camioneta"
+              href="/autos?type=Camioneta&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Camioneta
               <img src="/images/types/truck.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=SUV"
+              href="/autos?type=SUV&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               SUV / Crossover
               <img src="/images/types/suv-crossover.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=Cupé"
+              href="/autos?type=Cupé&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Cupé
               <img src="/images/types/coupe.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=Hatchback"
+              href="/autos?type=Hatchback&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Hatchback
               <img src="/images/types/hatchback.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=VAN"
+              href="/autos?type=VAN&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Van / Minivan
               <img src="/images/types/van-minivan.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=Convertible"
+              href="/autos?type=Convertible&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Convertible
               <img src="/images/types/convertible.png" alt="" />
             </Link>
             <Link
-              href="/autos?type=Rural"
+              href="/autos?type=Rural&page=1"
               className="px-4 py-2 bg-white rounded flex flex-col items-center justify-center shadow-sm"
             >
               Rural

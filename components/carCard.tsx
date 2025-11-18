@@ -1,7 +1,7 @@
-import { Car } from "@/app/generated/prisma/client";
+import { CarWithImages } from "@/types/prisma";
 import Link from "next/link";
 
-export default function CarCard({ car }: { car: Car }) {
+export default function CarCard({ car }: { car: CarWithImages }) {
   const img = car.images?.[0]?.url ?? "/placeholder-car.jpg";
 
   return (

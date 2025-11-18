@@ -4,7 +4,7 @@ import Auto from "./auto";
 import { CarWithImages } from "@/types/prisma";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = params;
+  const { id } = await params;
 
   const car = await prisma.car.findUnique({
     where: { id: Number(id) },

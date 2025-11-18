@@ -135,6 +135,7 @@ npm run dev
 - La búsqueda en tiempo real del navbar se implementó como Client Component con consultas vía API Routes, ya que `searchParams` no puede manejarse desde el navbar como en `page.tsx`.
 - Los componentes que obtienen autos y filtros se implementaron como Server Components para reducir el bundle y mejorar TTFB aprovechando llamadas directas a Prisma.
 - Se normalizaron los parámetros de filtrado para asegurar tipos válidos y evitar errores en consultas dinámicas.
+- Se implementó un context provider para manejar el estado de los filtros y sincronizarlo con la URL en el cliente.
 - La UI se dividió siguiendo responsabilidad única para simplificar mantenimiento y escalabilidad.
 - Los filtros (marcas, modelos, etc.) se cargan dinámicamente desde la base de datos, evitando listas hardcoded.
 - Los filtros se organizan en secciones colapsables usando elementos nativos `<details>`.
