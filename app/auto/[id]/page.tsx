@@ -1,10 +1,10 @@
 import prisma from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import Auto from "./auto";
-import { Car } from "@/app/generated/prisma/client";
+import { CarWithImages } from "@/types/prisma";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  const { id } = await params;
+  const { id } = params;
 
   const car = await prisma.car.findUnique({
     where: { id: Number(id) },
@@ -13,7 +13,7 @@ export default async function Page({ params }: { params: { id: string } }) {
 
   if (!car) return notFound();
 
-  const plainCar: Car = {
+  const plainCar: CarWithImages = {
     ...car,
     price: Number(car.price),
   };

@@ -18,7 +18,9 @@ funcional.
 - [Tecnologías usadas](#tecnologías-usadas)
 - [Guía para ejecutar la web app](#guía-de-ejecutar-la-web-app)
 - [Breve explicación de las decisiones técnicas tomadas](#breve-explicación-de-las-decisiones-técnicas-tomadas)
+- [Datos JSON utilizados](#datos-json-utilizados-data)
 - [Archivo SQL solicitado](#archivo-sql-solicitado-entregasql)
+- [API Endpoints solicitados](#api-endpoints-solicitados)
 - [Interfaz gráfica de la base de datos](#interfaz-gráfica-de-la-base-de-datos)
 - [Enlaces útiles](#enlaces)
 
@@ -129,7 +131,6 @@ npm run dev
 
 ### Breve explicación de las decisiones técnicas tomadas.
 
-- Conecté directamente la aplicación a la base de datos usando Prisma en lugar de un mock local.
 - Usé Prisma por su tipado, facilidad de uso e integración con Next.js.
 - La búsqueda en tiempo real del navbar se implementó como Client Component con consultas vía API Routes, ya que `searchParams` no puede manejarse desde el navbar como en `page.tsx`.
 - Los componentes que obtienen autos y filtros se implementaron como Server Components para reducir el bundle y mejorar TTFB aprovechando llamadas directas a Prisma.
@@ -139,7 +140,51 @@ npm run dev
 - Los filtros se organizan en secciones colapsables usando elementos nativos `<details>`.
 - Se añadieron las rutas especiales `not-found` y `loading` para estados de error y carga.
 
+### Datos JSON utilizados: [data](data)
+
 ### Archivo SQL solicitado: [entrega.sql](sql/entrega.sql)
+
+### API Endpoints solicitados
+
+**Endpoint**: Autos.
+
+- Devuelve todos los autos disponibles.
+- Permite búsqueda avanzada por marca, modelo o año mediante ?search=.
+
+```http
+  http://localhost:3000/api/autos
+```
+
+```http
+  http://localhost:3000/api/autos?search=Toyota
+```
+
+**Endpoint**: Clientes.
+
+- Devuelve la lista de clientes registrados.
+
+```http
+  http://localhost:3000/api/clientes
+```
+
+**Endpoint**: Métodos de pago.
+
+- Devuelve todas las formas de pago disponibles.
+
+```http
+  http://localhost:3000/api/metodos-pago
+```
+
+**Endpoint**: Ventas.
+
+- Devuelve las ventas, incluyendo relaciones:
+  - Cliente
+  - Auto
+  - Método de pago
+
+```http
+  http://localhost:3000/api/ventas
+```
 
 ### Interfaz gráfica de la base de datos
 

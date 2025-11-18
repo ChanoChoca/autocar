@@ -1,11 +1,11 @@
 "use client";
 
-import { Car } from "@/app/generated/prisma/client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
+import { CarWithImages } from "@/types/prisma";
 
-export default function Auto({ car, id }: { car: Car; id: string }) {
+export default function Auto({ car, id }: { car: CarWithImages; id: string }) {
   const [current, setCurrent] = useState(car.images?.[0]?.url);
 
   const carouselRef = useRef<HTMLElement | null>(null);
@@ -86,19 +86,19 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
             <div>
               <p className="font-bold text-xl mb-5">Información básica</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div className="border-b-2 pb-2 pb-2 border-[#e7e9ee]">
+                <div className="border-b-2 pb-2 border-[#e7e9ee]">
                   <p>Ciudad</p>
                   <p className="font-semibold">Junín</p>
                 </div>
-                <div className="border-b-2 pb-2 pb-2 border-[#e7e9ee]">
+                <div className="border-b-2 pb-2 border-[#e7e9ee]">
                   <p>Sucursal</p>
                   <p className="font-semibold">La mejor</p>
                 </div>
-                <div className="border-b-2 pb-2 pb-2 border-[#e7e9ee]">
+                <div className="border-b-2 pb-2 border-[#e7e9ee]">
                   <p>Stock ID</p>
                   <p className="font-semibold">{id}</p>
                 </div>
-                <div className="border-b-2 pb-2 pb-2 border-[#e7e9ee]">
+                <div className="border-b-2 pb-2 border-[#e7e9ee]">
                   <p>Estacionado en</p>
                   <p className="font-semibold">Vitrina</p>
                 </div>
@@ -126,38 +126,38 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                 </summary>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Caballos de Fuerza</p>
                       <p className="font-semibold">{car.horsepower}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Número de velocidades</p>
                       <p className="font-semibold">{car.gears}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Aceleración estimada 0-100 km/h</p>
                       <p className="font-semibold">{car.acceleration} s</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Tipo de Combustible</p>
                       <p className="font-semibold">{car.fuelType}</p>
                     </div>
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Cilindros</p>
                       <p className="font-semibold">{car.cylinders}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Litros</p>
                       <p className="font-semibold">{car.liters}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Peso bruto (kg)</p>
                       <p className="font-semibold">{car.grossWeight}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Tipo de motor</p>
                       <p className="font-semibold">{car.engineType}</p>
                     </div>
@@ -185,26 +185,26 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                 </summary>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Diámetro de Rin</p>
                       <p className="font-semibold">{car.rimDiameter}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Tipo de Rin</p>
                       <p className="font-semibold">{car.rimType}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Tipo de bulbo luz baja</p>
                       <p className="font-semibold">{car.lowBeamBulb}</p>
                     </div>
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Número de Puertas</p>
                       <p className="font-semibold">{car.doors}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Tipo de Carrocería</p>
                       <p className="font-semibold">{car.type}</p>
                     </div>
@@ -232,7 +232,7 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                 </summary>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Aire acondicionado</p>
                       <p className="font-semibold">
                         {car.airConditioning ? "Sí" : "No"}
@@ -241,7 +241,7 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Control de Crucero</p>
                       <p className="font-semibold">
                         {car.cruiseControl ? "Sí" : "No"}
@@ -272,17 +272,17 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
 
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Cantidad de discos de freno</p>
                       <p className="font-semibold">{car.brakeDiscs}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Asistencia de frenado</p>
                       <p className="font-semibold">
                         {car.brakeAssist ? "Sí" : "No"}
                       </p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Bolsas de Aire Frontales</p>
                       <p className="font-semibold">
                         {car.frontAirbags ? "Sí" : "No"}
@@ -291,17 +291,17 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Frenos ABS</p>
                       <p className="font-semibold">
                         {car.absBrakes ? "Sí" : "No"}
                       </p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Número total de Airbags</p>
                       <p className="font-semibold">{car.totalAirbags}</p>
                     </div>
-                    <div className="border-b-2 pb-2 pb-2.5 pt-2 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 pt-2 border-[#e7e9ee]">
                       <p>Bolsa de Aire en Rodillas</p>
                       <p className="font-semibold">
                         {car.kneeAirbag ? "Sí" : "No"}
@@ -331,14 +331,14 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                 </summary>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Número de Pasajeros</p>
                       <p className="font-semibold">{car.passengers}</p>
                     </div>
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Material de Asientos</p>
                       <p className="font-semibold">{car.seatMaterial}</p>
                     </div>
@@ -366,7 +366,7 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                 </summary>
                 <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Bluetooth</p>
                       <p className="font-semibold">
                         {car.bluetooth ? "Sí" : "No"}
@@ -375,7 +375,7 @@ export default function Auto({ car, id }: { car: Car; id: string }) {
                   </div>
 
                   <div>
-                    <div className="border-b-2 pb-2 pb-2.5 border-[#e7e9ee]">
+                    <div className="border-b-2 pb-2.5 border-[#e7e9ee]">
                       <p>Radio</p>
                       <p className="font-semibold">{car.radio}</p>
                     </div>
