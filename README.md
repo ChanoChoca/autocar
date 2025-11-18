@@ -129,6 +129,8 @@ Ejecutar la aplicación
 npm run dev
 ```
 
+---
+
 ### Breve explicación de las decisiones técnicas tomadas.
 
 - Usé Prisma por su tipado, facilidad de uso e integración con Next.js.
@@ -141,9 +143,15 @@ npm run dev
 - Los filtros se organizan en secciones colapsables usando elementos nativos `<details>`.
 - Se añadieron las rutas especiales `not-found` y `loading` para estados de error y carga.
 
+---
+
 ### Datos JSON utilizados: [data](data)
 
+---
+
 ### Archivo SQL solicitado: [entrega.sql](sql/entrega.sql)
+
+---
 
 ### API Endpoints solicitados
 
@@ -186,6 +194,8 @@ npm run dev
 ```http
   http://localhost:3000/api/ventas
 ```
+
+---
 
 ### Interfaz gráfica de la base de datos
 
