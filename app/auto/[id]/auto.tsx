@@ -32,19 +32,22 @@ export default function Auto({ car, id }: { car: CarWithImages; id: string }) {
             Autos
           </Link>
           <span className="mx-2">›</span>
-          <Link href={`/autos?brands=${car.brand}`} className="text-gray-500">
+          <Link
+            href={`/autos?brands=${car.brand}&page=1`}
+            className="text-gray-500"
+          >
             {car.brand}
           </Link>
           <span className="mx-2">›</span>
           <Link
-            href={`/autos?brands=${car.brand}&models=${car.model}`}
+            href={`/autos?brands=${car.brand}&models=${car.model}&page=1`}
             className="text-gray-500"
           >
             {car.model}
           </Link>
           <span className="mx-2">›</span>
           <Link
-            href={`/autos?brands=${car.brand}&models=${car.model}&year=${car.year}`}
+            href={`/autos?brands=${car.brand}&models=${car.model}&year=${car.year}&page=1`}
             className="text-gray-500"
           >
             {car.year}
@@ -620,3 +623,4 @@ export default function Auto({ car, id }: { car: CarWithImages; id: string }) {
     </main>
   );
 }
+
