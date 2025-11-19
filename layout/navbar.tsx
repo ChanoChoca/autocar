@@ -49,37 +49,37 @@ export default function Navbar() {
           >
             <div className="flex flex-col justify-between w-6 h-5">
               <span
-                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out ${
+                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out drop-shadow-[0_0_4px_rgba(0,0,0,1)] ${
                   open ? "rotate-45 translate-y-2.25" : ""
                 }`}
               ></span>
               <span
-                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out ${
+                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out drop-shadow-[0_0_4px_rgba(0,0,0,1)] ${
                   open ? "opacity-0" : ""
                 }`}
               ></span>
               <span
-                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out ${
+                className={`block h-0.5 w-full bg-black transform transition duration-300 ease-in-out drop-shadow-[0_0_4px_rgba(0,0,0,1)]  ${
                   open ? "-rotate-45 -translate-y-2.25" : ""
                 }`}
               ></span>
             </div>
           </div>
-          <div
-            className={`
-    fixed top-[92px] left-0 h-screen w-[80vw] max-w-xs
+        </div>
+      </nav>
+      <div
+        className={`
+    fixed top-[92px] left-0 w-[80vw] h-full max-w-xs
     transform transition-transform duration-300 ease-in-out lg:hidden
     ${open ? "translate-x-0" : "-translate-x-full"}
     bg-white/30 backdrop-blur-[10px] shadow-[inset_0px_1px_1px_1px_rgba(0,0,0,0.05)]
   `}
-          >
-            <div className="flex flex-col gap-4 relative p-6 h-screen text-center text-black font-bold text-4xl">
-              <Link href="/">Inicio</Link>
-              <Link href="/sobre-nosotros">Ver autos</Link>
-            </div>
-          </div>
+      >
+        <div className="flex flex-col gap-4 relative p-6 text-center text-black font-bold text-4xl">
+          <Link href="/">Inicio</Link>
+          <Link href="/autos">Ver autos</Link>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }
