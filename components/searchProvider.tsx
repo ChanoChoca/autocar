@@ -24,9 +24,10 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const { replace } = useRouter();
 
-  const [values, setValues] = useState<SearchState>(() => {
+  const [values, setValues] = useState(() => {
     const init: SearchState = {};
     searchParams.forEach((value, key) => {
+      if (key === "page") return;
       init[key] = value.includes(",") ? value.split(",") : value;
     });
     return init;
@@ -50,19 +51,33 @@ export function SearchProvider({ children }: { children: React.ReactNode }) {
             !prevVal.every((v, i) => v === normalized[i])
           : prevVal !== normalized;
 
-      if (!changed) return prev;
-      return { ...prev, [param]: normalized };
+      return changed ? { ...prev, [param]: normalized } : prev;
     });
   };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const params = new URLSearchParams();
-      Object.entries(values).forEach(([k, v]) => {
-        if (Array.isArray(v)) params.set(k, v.join(","));
-        else if (v) params.set(k, String(v));
+      const params = new URLSearchParams(searchParams);
+
+      let filtrosCambiaron = false;
+
+      Object.entries(values).forEach(([key, value]) => {
+        const prevValue = searchParams.get(key);
+
+        const newValue = Array.isArray(value) ? value.join(",") : value ?? "";
+
+        if ((newValue || prevValue) && newValue !== prevValue) {
+          filtrosCambiaron = true;
+        }
+
+        if (Array.isArray(value)) params.set(key, newValue);
+        else if (value) params.set(key, String(value));
+        else params.delete(key);
       });
-      params.set("page", "1");
+
+      if (filtrosCambiaron) {
+        params.set("page", "1");
+      }
 
       if (params.toString() !== searchParams.toString()) {
         replace(`${pathname}?${params.toString()}`);

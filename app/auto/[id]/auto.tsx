@@ -623,4 +623,3 @@ export default function Auto({ car, id }: { car: CarWithImages; id: string }) {
     </main>
   );
 }
-

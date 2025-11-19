@@ -5,8 +5,8 @@ import CarsList from "./carsList";
 import { getCarFilters } from "@/lib/getFilters";
 import CheckboxGroup from "./checkboxSearch";
 import Loading from "@/app/autos/loading";
-import { SearchProvider } from "./searchProvider";
 import { fetchCarsCount } from "@/lib/fetchCars";
+import { SearchProvider } from "./searchProvider";
 
 export default async function CarsFilterBrowser({
   searchParams,
@@ -22,15 +22,14 @@ export default async function CarsFilterBrowser({
     type?: string;
   };
 }) {
-  const params = await searchParams;
-  const min = Number(params.min) || undefined;
-  const max = Number(params.max) || undefined;
-  const type = params.type || undefined;
-  const brands = params.brands?.split(",") || [];
-  const models = params.models?.split(",") || [];
-  const year = Number(params.year) || undefined;
-  const transmission = params.transmission || undefined;
-  const currentPage = Number(params.page) || 1;
+  const min = Number(searchParams.min) || undefined;
+  const max = Number(searchParams.max) || undefined;
+  const type = searchParams.type || undefined;
+  const brands = searchParams.brands?.split(",") || [];
+  const models = searchParams.models?.split(",") || [];
+  const year = Number(searchParams.year) || undefined;
+  const transmission = searchParams.transmission || undefined;
+  const currentPage = Number(searchParams.page) || 1;
 
   const {
     brands: availableBrands,

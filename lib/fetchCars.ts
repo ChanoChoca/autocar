@@ -1,3 +1,5 @@
+import prisma from "./prisma";
+
 export async function fetchCarsList({
   page = 1,
   min,
