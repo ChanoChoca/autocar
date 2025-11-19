@@ -1,6 +1,4 @@
-import prisma from "./prisma";
-
-export async function fetchCars({
+export async function fetchCarsList({
   page = 1,
   min,
   max,
@@ -28,23 +26,14 @@ export async function fetchCars({
   };
 
   if (type) where.type = type;
-
   if (min !== undefined || max !== undefined) {
     where.price = {};
     if (min !== undefined) where.price.gte = min;
     if (max !== undefined) where.price.lte = max;
   }
-
-  if (brands?.length) {
-    where.brand = { in: brands };
-  }
-
-  if (models?.length) {
-    where.model = { in: models };
-  }
-
+  if (brands?.length) where.brand = { in: brands };
+  if (models?.length) where.model = { in: models };
   if (year) where.year = year;
-
   if (transmission) where.transmission = transmission;
 
   const cars = await prisma.car.findMany({
@@ -55,7 +44,41 @@ export async function fetchCars({
     include: { images: true },
   });
 
-  const total = await prisma.car.count({ where });
+  return cars;
+}
 
-  return { cars, total };
+export async function fetchCarsCount({
+  min,
+  max,
+  type,
+  brands,
+  models,
+  year,
+  transmission,
+}: {
+  min?: number;
+  max?: number;
+  type?: string;
+  brands?: string[];
+  models?: string[];
+  year?: number;
+  transmission?: string;
+}) {
+  const where: any = {
+    sales: { none: {} },
+  };
+
+  if (type) where.type = type;
+  if (min !== undefined || max !== undefined) {
+    where.price = {};
+    if (min !== undefined) where.price.gte = min;
+    if (max !== undefined) where.price.lte = max;
+  }
+  if (brands?.length) where.brand = { in: brands };
+  if (models?.length) where.model = { in: models };
+  if (year) where.year = year;
+  if (transmission) where.transmission = transmission;
+
+  const total = await prisma.car.count({ where });
+  return total;
 }

@@ -1,47 +1,44 @@
 import prisma from "./prisma";
 
 export async function getCarFilters(brands?: string[]) {
-  const brandRows = await prisma.car.findMany({
-    select: { brand: true },
-    where: { sales: { none: {} } },
-    distinct: ["brand"],
-    orderBy: { brand: "asc" },
-  });
+  const where: any = { sales: { none: {} } };
+  if (brands && brands.length) where.brand = { in: brands };
 
-  const modelRows = await prisma.car.findMany({
-    select: { model: true, brand: true },
-    where: {
-      sales: { none: {} },
-      ...(brands && brands.length ? { brand: { in: brands } } : {}),
+  const rows = await prisma.car.findMany({
+    where,
+    select: {
+      brand: true,
+      model: true,
+      type: true,
+      transmission: true,
     },
-    orderBy: { model: "asc" },
+    orderBy: [
+      { brand: "asc" },
+      { model: "asc" },
+      { type: "asc" },
+      { transmission: "asc" },
+    ],
   });
 
-  const types = await prisma.car.findMany({
-    select: { type: true },
-    where: { sales: { none: {} } },
-    distinct: ["type"],
-    orderBy: { type: "asc" },
-  });
+  const brandsSet = new Set<string>();
+  const typesSet = new Set<string>();
+  const transmissionsSet = new Set<string>();
+  const modelsMap = new Map<string, { brand: string; model: string }>();
 
-  const transmissions = await prisma.car.findMany({
-    select: { transmission: true },
-    where: { sales: { none: {} } },
-    distinct: ["transmission"],
-    orderBy: { transmission: "asc" },
-  });
+  rows.forEach((r) => {
+    brandsSet.add(r.brand);
+    typesSet.add(r.type);
+    transmissionsSet.add(r.transmission);
 
-  const uniqueModelsMap = new Map<string, { model: string; brand: string }>();
-  modelRows.forEach((r) => {
-    const key = `${r.model}__${r.brand}`;
-    if (!uniqueModelsMap.has(key))
-      uniqueModelsMap.set(key, { model: r.model, brand: r.brand });
+    const key = `${r.brand}__${r.model}`;
+    if (!modelsMap.has(key))
+      modelsMap.set(key, { brand: r.brand, model: r.model });
   });
 
   return {
-    brands: brandRows.map((b) => b.brand),
-    models: Array.from(uniqueModelsMap.values()),
-    types: types.map((t) => t.type),
-    transmissions: transmissions.map((t) => t.transmission),
+    brands: Array.from(brandsSet).sort(),
+    types: Array.from(typesSet).sort(),
+    transmissions: Array.from(transmissionsSet).sort(),
+    models: Array.from(modelsMap.values()),
   };
 }

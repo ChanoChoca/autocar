@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import Pagination from "./pagination";
 import Search from "./search";
-import { fetchCars } from "@/lib/fetchCars";
 import CarsList from "./carsList";
 import { getCarFilters } from "@/lib/getFilters";
 import CheckboxGroup from "./checkboxSearch";
 import Loading from "@/app/autos/loading";
-import { SearchProvider } from "./searchProvicer";
+import { SearchProvider } from "./searchProvider";
+import { fetchCarsCount } from "@/lib/fetchCars";
 
 export default async function CarsFilterBrowser({
   searchParams,
@@ -39,8 +39,7 @@ export default async function CarsFilterBrowser({
     transmissions: availableTransmissions,
   } = await getCarFilters(brands);
 
-  const { total } = await fetchCars({
-    page: currentPage,
+  const total = await fetchCarsCount({
     min,
     max,
     type,
@@ -48,7 +47,6 @@ export default async function CarsFilterBrowser({
     models,
     year,
     transmission,
-    pageSize: 10,
   });
   const totalPages = Math.ceil(total / 10);
 

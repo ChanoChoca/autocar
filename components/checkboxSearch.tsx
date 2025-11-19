@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearchContext } from "./searchProvicer";
+import { useSearchContext } from "./searchProvider";
 
 type OptionShape = { value: string; brand?: string };
 

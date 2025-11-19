@@ -1,4 +1,4 @@
-import { fetchCars } from "@/lib/fetchCars";
+import { fetchCarsList } from "@/lib/fetchCars";
 import CarCard from "./carCard";
 
 export default async function CarsList({
@@ -20,7 +20,7 @@ export default async function CarsList({
   year?: number;
   transmission?: string;
 }) {
-  const { cars } = await fetchCars({
+  const cars = await fetchCarsList({
     page: currentPage,
     min,
     max,
