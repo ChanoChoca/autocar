@@ -12,7 +12,11 @@ export default function CheckboxGroup({
   options: (string | OptionShape)[];
 }) {
   const { values, setValue } = useSearchContext();
-  const selected: string[] = (values[param] as string[]) || [];
+  const selected: string[] = Array.isArray(values[param])
+    ? values[param]
+    : values[param]
+    ? [values[param]]
+    : [];
   const normalizedOptions: OptionShape[] = options.map((o) =>
     typeof o === "string" ? { value: o } : o
   );
@@ -52,3 +56,4 @@ export default function CheckboxGroup({
     </div>
   );
 }
+
